@@ -85,13 +85,13 @@ namespace Multi_Purpose_Graphic_Splitter
 
         private void scrlSplitColumns_Scroll(object sender, ScrollEventArgs e)
         {
-            lblSplitColumns.Text = "Split Columns: " + scrlSplitColumns.Value;
+            lblSplitColumns.Text = "Column Splits: " + scrlSplitColumns.Value;
             UpdatePreview();
         }
 
         private void scrlSplitRows_Scroll(object sender, ScrollEventArgs e)
         {
-            lblSplitRows.Text = "Split Rows: " + scrlSplitRows.Value;
+            lblSplitRows.Text = "Row Splits: " + scrlSplitRows.Value;
             UpdatePreview();
         }
 
@@ -139,21 +139,42 @@ namespace Multi_Purpose_Graphic_Splitter
                 {
                     h = sampleImg.Height / (scrlSplitRows.Value + 1);
                 }
-                for (int x = 0; x < scrlSplitColumns.Value + 1; x++)
+                if (!rdoLeftToRight.Checked)
+                {
+                    for (int x = 0; x < scrlSplitColumns.Value + 1; x++)
+                    {
+                        for (int y = 0; y < scrlSplitRows.Value + 1; y++)
+                        {
+                            saveBitmap = new Bitmap(w, h);
+                            g = Graphics.FromImage(saveBitmap);
+                            g.DrawImage(tmpBitmap, new Rectangle(0, 0, w, h), new Rectangle(x * w, y * h, w, h), GraphicsUnit.Pixel);
+                            g.Dispose();
+                            saveBitmap.Save(txtDestination.Text + "/" + filenum + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                            filenum++;
+                        }
+                    }
+                }
+                else
                 {
                     for (int y = 0; y < scrlSplitRows.Value + 1; y++)
                     {
-                        saveBitmap = new Bitmap(w, h);
-                        g = Graphics.FromImage(saveBitmap);
-                        g.DrawImage(tmpBitmap, new Rectangle(0, 0, w, h), new Rectangle(x * w, y * h, w, h), GraphicsUnit.Pixel);
-                        g.Dispose();
-                        saveBitmap.Save(txtDestination.Text + "/" + filenum + ".png", System.Drawing.Imaging.ImageFormat.Png);
-                        filenum++;
+                        for (int x = 0; x < scrlSplitColumns.Value + 1; x++)
+                        {
+
+                            saveBitmap = new Bitmap(w, h);
+                            g = Graphics.FromImage(saveBitmap);
+                            g.DrawImage(tmpBitmap, new Rectangle(0, 0, w, h), new Rectangle(x * w, y * h, w, h), GraphicsUnit.Pixel);
+                            g.Dispose();
+                            saveBitmap.Save(txtDestination.Text + "/" + filenum + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                            filenum++;
+                        }
                     }
                 }
+
             }
             MessageBox.Show("Images successfully split! Image splitter courtosy of Ascension Game Dev. http://www.ascensiongamedev.com \nHave a great day!");
             Application.Exit();
+
         }
 
         void frmMain_Resize(object sender, System.EventArgs e)
@@ -165,5 +186,6 @@ namespace Multi_Purpose_Graphic_Splitter
         {
             if (sampleImg != null) { UpdatePreview(); }
         }
+
     }
 }

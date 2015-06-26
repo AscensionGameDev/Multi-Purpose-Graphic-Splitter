@@ -46,6 +46,8 @@
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.btnBrowseDestination = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
+            this.rdoLeftToRight = new System.Windows.Forms.RadioButton();
+            this.rdoTopToBottom = new System.Windows.Forms.RadioButton();
             this.grpStep1.SuspendLayout();
             this.grpStep2.SuspendLayout();
             this.grpStep3.SuspendLayout();
@@ -131,7 +133,7 @@
             this.lblSplitRows.Name = "lblSplitRows";
             this.lblSplitRows.Size = new System.Drawing.Size(69, 13);
             this.lblSplitRows.TabIndex = 5;
-            this.lblSplitRows.Text = "Split Rows: 0";
+            this.lblSplitRows.Text = "Row Splits: 0";
             // 
             // scrlSplitColumns
             // 
@@ -148,7 +150,7 @@
             this.lblSplitColumns.Name = "lblSplitColumns";
             this.lblSplitColumns.Size = new System.Drawing.Size(82, 13);
             this.lblSplitColumns.TabIndex = 3;
-            this.lblSplitColumns.Text = "Split Columns: 0";
+            this.lblSplitColumns.Text = "Column Splits: 0";
             // 
             // pnlSampleImg
             // 
@@ -169,13 +171,15 @@
             // 
             // grpStep3
             // 
+            this.grpStep3.Controls.Add(this.rdoTopToBottom);
+            this.grpStep3.Controls.Add(this.rdoLeftToRight);
             this.grpStep3.Controls.Add(this.label4);
             this.grpStep3.Controls.Add(this.label5);
             this.grpStep3.Controls.Add(this.txtDestination);
             this.grpStep3.Controls.Add(this.btnBrowseDestination);
             this.grpStep3.Location = new System.Drawing.Point(12, 460);
             this.grpStep3.Name = "grpStep3";
-            this.grpStep3.Size = new System.Drawing.Size(360, 61);
+            this.grpStep3.Size = new System.Drawing.Size(360, 82);
             this.grpStep3.TabIndex = 6;
             this.grpStep3.TabStop = false;
             this.grpStep3.Text = "Step 3";
@@ -218,7 +222,7 @@
             // 
             // btnSplit
             // 
-            this.btnSplit.Location = new System.Drawing.Point(110, 527);
+            this.btnSplit.Location = new System.Drawing.Point(110, 548);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(149, 34);
             this.btnSplit.TabIndex = 7;
@@ -227,11 +231,34 @@
             this.btnSplit.Visible = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
             // 
+            // rdoLeftToRight
+            // 
+            this.rdoLeftToRight.AutoSize = true;
+            this.rdoLeftToRight.Checked = true;
+            this.rdoLeftToRight.Location = new System.Drawing.Point(7, 59);
+            this.rdoLeftToRight.Name = "rdoLeftToRight";
+            this.rdoLeftToRight.Size = new System.Drawing.Size(105, 17);
+            this.rdoLeftToRight.TabIndex = 4;
+            this.rdoLeftToRight.TabStop = true;
+            this.rdoLeftToRight.Text = "Left to Right First";
+            this.rdoLeftToRight.UseVisualStyleBackColor = true;
+            // 
+            // rdoTopToBottom
+            // 
+            this.rdoTopToBottom.AutoSize = true;
+            this.rdoTopToBottom.Location = new System.Drawing.Point(175, 59);
+            this.rdoTopToBottom.Name = "rdoTopToBottom";
+            this.rdoTopToBottom.Size = new System.Drawing.Size(114, 17);
+            this.rdoTopToBottom.TabIndex = 8;
+            this.rdoTopToBottom.TabStop = true;
+            this.rdoTopToBottom.Text = "Top to Bottom First";
+            this.rdoTopToBottom.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 573);
+            this.ClientSize = new System.Drawing.Size(384, 589);
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.grpStep3);
             this.Controls.Add(this.grpStep2);
@@ -269,6 +296,8 @@
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.Button btnBrowseDestination;
         private System.Windows.Forms.Button btnSplit;
+        private System.Windows.Forms.RadioButton rdoTopToBottom;
+        private System.Windows.Forms.RadioButton rdoLeftToRight;
     }
 }
 
