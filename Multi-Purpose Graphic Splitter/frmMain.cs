@@ -26,10 +26,10 @@ namespace Multi_Purpose_Graphic_Splitter
             grpStep3.Hide();
             btnSplit.Hide();
             txtDestination.Text = "";
-            scrlSplitColumns.Value = 0;
-            scrlSplitRows.Value = 0;
-            lblSplitColumns.Text = "Split Columns: " + scrlSplitColumns.Value;
-            lblSplitRows.Text = "Split Rows: " + scrlSplitRows.Value;
+            scrlSplitColumns.Value = 1;
+            scrlSplitRows.Value = 1;
+            lblSplitColumns.Text = "Columns: " + scrlSplitColumns.Value;
+            lblSplitRows.Text = "Rows: " + scrlSplitRows.Value;
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 txtSource.Text = fbd.SelectedPath;
@@ -59,39 +59,43 @@ namespace Multi_Purpose_Graphic_Splitter
             int i = 0;
             int w = 0;
             int h = 0;
-            Graphics g = pnlSampleImg.CreateGraphics();
-            g.FillRectangle(Brushes.Transparent, new Rectangle(0, 0, pnlSampleImg.Width, pnlSampleImg.Height));
-            g.DrawImage(sampleImg, new Point(0, 0));
-            if (scrlSplitColumns.Value > 0)
+            var img = new Bitmap(sampleImg.Width, sampleImg.Height);
+            pnlSampleImg.Width = sampleImg.Width;
+            pnlSampleImg.Height = sampleImg.Height;
+            Graphics g = Graphics.FromImage(img);
+            g.FillRectangle(new SolidBrush(pnlSampleImg.BackColor), new Rectangle(0, 0, pnlSampleImg.Width, pnlSampleImg.Height));
+            g.DrawImage(sampleImg, new Rectangle(0, 0, sampleImg.Width, sampleImg.Height), new Rectangle(0, 0, sampleImg.Width, sampleImg.Height),GraphicsUnit.Pixel);
+            if (scrlSplitColumns.Value > 1)
             {
-                i = scrlSplitColumns.Value + 1;
+                i = scrlSplitColumns.Value;
                 w = sampleImg.Width / i;
-                for (int x = 0; x < i; x++)
+                for (int x = 1; x <= i; x++)
                 {
                     g.DrawLine(Pens.Black, new Point(x * w, 0), new Point(x * w, sampleImg.Height));
                 }
             }
-            if (scrlSplitRows.Value > 0)
+            if (scrlSplitRows.Value > 1)
             {
-                i = scrlSplitRows.Value + 1;
+                i = scrlSplitRows.Value;
                 h = sampleImg.Height / i;
-                for (int x = 0; x < i; x++)
+                for (int x = 1; x <= i; x++)
                 {
                     g.DrawLine(Pens.Black, new Point(0, h * x), new Point(sampleImg.Width, h * x));
                 }
             }
             g.Dispose();
+            pnlSampleImg.BackgroundImage = img;
         }
 
         private void scrlSplitColumns_Scroll(object sender, ScrollEventArgs e)
         {
-            lblSplitColumns.Text = "Column Splits: " + scrlSplitColumns.Value;
+            lblSplitColumns.Text = "Columns: " + scrlSplitColumns.Value;
             UpdatePreview();
         }
 
         private void scrlSplitRows_Scroll(object sender, ScrollEventArgs e)
         {
-            lblSplitRows.Text = "Row Splits: " + scrlSplitRows.Value;
+            lblSplitRows.Text = "Rows: " + scrlSplitRows.Value;
             UpdatePreview();
         }
 
@@ -133,17 +137,17 @@ namespace Multi_Purpose_Graphic_Splitter
                 h = tmpBitmap.Height;
                 if (scrlSplitColumns.Value > 0)
                 {
-                    w = sampleImg.Width / (scrlSplitColumns.Value + 1);
+                    w = sampleImg.Width / (scrlSplitColumns.Value);
                 }
                 if (scrlSplitRows.Value > 0)
                 {
-                    h = sampleImg.Height / (scrlSplitRows.Value + 1);
+                    h = sampleImg.Height / (scrlSplitRows.Value);
                 }
                 if (!rdoLeftToRight.Checked)
                 {
-                    for (int x = 0; x < scrlSplitColumns.Value + 1; x++)
+                    for (int x = 0; x < scrlSplitColumns.Value; x++)
                     {
-                        for (int y = 0; y < scrlSplitRows.Value + 1; y++)
+                        for (int y = 0; y < scrlSplitRows.Value; y++)
                         {
                             saveBitmap = new Bitmap(w, h);
                             g = Graphics.FromImage(saveBitmap);
@@ -156,9 +160,9 @@ namespace Multi_Purpose_Graphic_Splitter
                 }
                 else
                 {
-                    for (int y = 0; y < scrlSplitRows.Value + 1; y++)
+                    for (int y = 0; y < scrlSplitRows.Value; y++)
                     {
-                        for (int x = 0; x < scrlSplitColumns.Value + 1; x++)
+                        for (int x = 0; x < scrlSplitColumns.Value; x++)
                         {
 
                             saveBitmap = new Bitmap(w, h);

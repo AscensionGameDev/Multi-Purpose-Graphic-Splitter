@@ -41,16 +41,18 @@
             this.pnlSampleImg = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.grpStep3 = new System.Windows.Forms.GroupBox();
+            this.rdoTopToBottom = new System.Windows.Forms.RadioButton();
+            this.rdoLeftToRight = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.btnBrowseDestination = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
-            this.rdoLeftToRight = new System.Windows.Forms.RadioButton();
-            this.rdoTopToBottom = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.grpStep1.SuspendLayout();
             this.grpStep2.SuspendLayout();
             this.grpStep3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSource
@@ -108,8 +110,8 @@
             this.grpStep2.Controls.Add(this.lblSplitRows);
             this.grpStep2.Controls.Add(this.scrlSplitColumns);
             this.grpStep2.Controls.Add(this.lblSplitColumns);
-            this.grpStep2.Controls.Add(this.pnlSampleImg);
             this.grpStep2.Controls.Add(this.label3);
+            this.grpStep2.Controls.Add(this.panel1);
             this.grpStep2.Location = new System.Drawing.Point(12, 101);
             this.grpStep2.Name = "grpStep2";
             this.grpStep2.Size = new System.Drawing.Size(360, 353);
@@ -121,9 +123,11 @@
             // scrlSplitRows
             // 
             this.scrlSplitRows.Location = new System.Drawing.Point(98, 322);
+            this.scrlSplitRows.Minimum = 1;
             this.scrlSplitRows.Name = "scrlSplitRows";
             this.scrlSplitRows.Size = new System.Drawing.Size(256, 17);
             this.scrlSplitRows.TabIndex = 6;
+            this.scrlSplitRows.Value = 1;
             this.scrlSplitRows.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scrlSplitRows_Scroll);
             // 
             // lblSplitRows
@@ -131,16 +135,18 @@
             this.lblSplitRows.AutoSize = true;
             this.lblSplitRows.Location = new System.Drawing.Point(9, 323);
             this.lblSplitRows.Name = "lblSplitRows";
-            this.lblSplitRows.Size = new System.Drawing.Size(69, 13);
+            this.lblSplitRows.Size = new System.Drawing.Size(46, 13);
             this.lblSplitRows.TabIndex = 5;
-            this.lblSplitRows.Text = "Row Splits: 0";
+            this.lblSplitRows.Text = "Rows: 1";
             // 
             // scrlSplitColumns
             // 
             this.scrlSplitColumns.Location = new System.Drawing.Point(98, 296);
+            this.scrlSplitColumns.Minimum = 1;
             this.scrlSplitColumns.Name = "scrlSplitColumns";
             this.scrlSplitColumns.Size = new System.Drawing.Size(256, 17);
             this.scrlSplitColumns.TabIndex = 4;
+            this.scrlSplitColumns.Value = 1;
             this.scrlSplitColumns.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scrlSplitColumns_Scroll);
             // 
             // lblSplitColumns
@@ -148,13 +154,14 @@
             this.lblSplitColumns.AutoSize = true;
             this.lblSplitColumns.Location = new System.Drawing.Point(9, 297);
             this.lblSplitColumns.Name = "lblSplitColumns";
-            this.lblSplitColumns.Size = new System.Drawing.Size(82, 13);
+            this.lblSplitColumns.Size = new System.Drawing.Size(59, 13);
             this.lblSplitColumns.TabIndex = 3;
-            this.lblSplitColumns.Text = "Column Splits: 0";
+            this.lblSplitColumns.Text = "Columns: 1";
             // 
             // pnlSampleImg
             // 
-            this.pnlSampleImg.Location = new System.Drawing.Point(9, 57);
+            this.pnlSampleImg.AutoScroll = true;
+            this.pnlSampleImg.Location = new System.Drawing.Point(0, 0);
             this.pnlSampleImg.Name = "pnlSampleImg";
             this.pnlSampleImg.Size = new System.Drawing.Size(345, 233);
             this.pnlSampleImg.TabIndex = 2;
@@ -184,6 +191,29 @@
             this.grpStep3.TabStop = false;
             this.grpStep3.Text = "Step 3";
             this.grpStep3.Visible = false;
+            // 
+            // rdoTopToBottom
+            // 
+            this.rdoTopToBottom.AutoSize = true;
+            this.rdoTopToBottom.Location = new System.Drawing.Point(175, 59);
+            this.rdoTopToBottom.Name = "rdoTopToBottom";
+            this.rdoTopToBottom.Size = new System.Drawing.Size(114, 17);
+            this.rdoTopToBottom.TabIndex = 8;
+            this.rdoTopToBottom.TabStop = true;
+            this.rdoTopToBottom.Text = "Top to Bottom First";
+            this.rdoTopToBottom.UseVisualStyleBackColor = true;
+            // 
+            // rdoLeftToRight
+            // 
+            this.rdoLeftToRight.AutoSize = true;
+            this.rdoLeftToRight.Checked = true;
+            this.rdoLeftToRight.Location = new System.Drawing.Point(7, 59);
+            this.rdoLeftToRight.Name = "rdoLeftToRight";
+            this.rdoLeftToRight.Size = new System.Drawing.Size(105, 17);
+            this.rdoLeftToRight.TabIndex = 4;
+            this.rdoLeftToRight.TabStop = true;
+            this.rdoLeftToRight.Text = "Left to Right First";
+            this.rdoLeftToRight.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -231,28 +261,14 @@
             this.btnSplit.Visible = false;
             this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
             // 
-            // rdoLeftToRight
+            // panel1
             // 
-            this.rdoLeftToRight.AutoSize = true;
-            this.rdoLeftToRight.Checked = true;
-            this.rdoLeftToRight.Location = new System.Drawing.Point(7, 59);
-            this.rdoLeftToRight.Name = "rdoLeftToRight";
-            this.rdoLeftToRight.Size = new System.Drawing.Size(105, 17);
-            this.rdoLeftToRight.TabIndex = 4;
-            this.rdoLeftToRight.TabStop = true;
-            this.rdoLeftToRight.Text = "Left to Right First";
-            this.rdoLeftToRight.UseVisualStyleBackColor = true;
-            // 
-            // rdoTopToBottom
-            // 
-            this.rdoTopToBottom.AutoSize = true;
-            this.rdoTopToBottom.Location = new System.Drawing.Point(175, 59);
-            this.rdoTopToBottom.Name = "rdoTopToBottom";
-            this.rdoTopToBottom.Size = new System.Drawing.Size(114, 17);
-            this.rdoTopToBottom.TabIndex = 8;
-            this.rdoTopToBottom.TabStop = true;
-            this.rdoTopToBottom.Text = "Top to Bottom First";
-            this.rdoTopToBottom.UseVisualStyleBackColor = true;
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.pnlSampleImg);
+            this.panel1.Location = new System.Drawing.Point(9, 60);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(345, 233);
+            this.panel1.TabIndex = 3;
             // 
             // frmMain
             // 
@@ -273,6 +289,7 @@
             this.grpStep2.PerformLayout();
             this.grpStep3.ResumeLayout(false);
             this.grpStep3.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -298,6 +315,7 @@
         private System.Windows.Forms.Button btnSplit;
         private System.Windows.Forms.RadioButton rdoTopToBottom;
         private System.Windows.Forms.RadioButton rdoLeftToRight;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
